@@ -1,25 +1,20 @@
-name: Sync Back to alt_deploy
-
 on:
-  push:
-    branches:
-      - master
-
+  schedule:
+    - cron: '*/2 * * * *'
+name: create-pull-request workflow
 jobs:
-  sync-branches:
+  createPullRequest:
     runs-on: ubuntu-latest
-    name: Syncing branches
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Set up Node
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - name: Pull request action
+        run: date +%s > report.txt
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
         with:
-          node-version: 12
-      - name: Opening pull request
-        id: pull
-        uses: tretuna/sync-branches@1.2.0
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: 'master'
-          TO_BRANCH: 'alt_deploy'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Pull request action
+          title: 'Pull request action'
+          body: >
+            Testing pull request
+          labels: report, automated pr
