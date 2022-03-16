@@ -6,15 +6,4 @@ jobs:
   createPullRequest:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Pull request action
-        run: date +%s > report.txt
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Pull request action
-          title: 'Pull request action'
-          body: >
-            Testing pull request
-          labels: report, automated pr
+      - run: echo "Test cron"
