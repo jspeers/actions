@@ -21,3 +21,10 @@ jobs:
           git pull
           git merge --no-ff main -m "Auto-merge master back to datadog"
           git push
+    - name: Update date file
+      run: |
+          git pull
+          date > ddUpdate.txt
+          git add ddUpdate.txt
+          git commit -m "Commit to trigger build"
+          git push
