@@ -2,7 +2,6 @@
 name: Merge master to datadog
 
 on:
-  branches: [master]
   schedule:
     - cron: '*/5 * * * *'
 jobs:
