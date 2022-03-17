@@ -1,9 +1,9 @@
 # .github/workflows/scheduled-builds.yml
-name: CRON Schedule
+name: Merge master to datadog
 
 on:
+  branches: [master]
   schedule:
-    branches: [master]
     - cron: '*/5 * * * *'
 jobs:
   merge-master-to-datadog:
@@ -14,7 +14,7 @@ jobs:
       run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "Github Actions"
-    - name: Merge master back to dev
+    - name: Merge master to datadog
       run: |
           git fetch --unshallow
           git checkout datadog
